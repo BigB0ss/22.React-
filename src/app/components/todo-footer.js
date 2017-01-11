@@ -20,6 +20,6 @@ export  default  class ToDoFooter extends Component {
         </div>
         <button className="todo-list__clear-completed">Clear completed</button>
       </div>
-    )
-  };
+    );
+  }
 }
