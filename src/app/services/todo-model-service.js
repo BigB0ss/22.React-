@@ -2,24 +2,30 @@ import UtilsService from './utils-service';
 
 export default class ToDoModelService {
 
+
   constructor(key) {
     this.UtilsService = new UtilsService();
     this.key = key;
     this.todos = this.UtilsService.retrieve(key);
     this.onChanges = [];
+
   }
+
   subscribe(onChange) {
     this.onChanges.push(onChange);
     let index = this.onChanges.length - 1;
+    alert('ololo');
     return {
       unsubscribe: () => {
         this.onChanges.splice(index, 1);
       }
     };
   }
+
   getToDos() {
     return this.todos;
   }
+
   inform() {
     this.UtilsService.store(this.key, this.todos);
     this.onChanges.forEach((cb) => cb());
@@ -52,7 +58,7 @@ export default class ToDoModelService {
   }
 
   destroy(todo) {
-    this.todos = this.todos.filter((candidate) => candidate.id !== todo.id );
+    this.todos = this.todos.filter((candidate) => candidate.id !== todo.id);
     this.inform();
   }
 

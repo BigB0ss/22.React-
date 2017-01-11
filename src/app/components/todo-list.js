@@ -6,6 +6,8 @@ import ToDoItem from  './todo-item';
 export default  class ToDoList extends Component {
   constructor(props) {
     super(props)
+    this.todosModelService = window.toDoModelService;
+
   }
 
   render() {
@@ -16,5 +18,12 @@ export default  class ToDoList extends Component {
       </div>
     );
 
+    addHandler()
+    {
+      todo:this.todosModelService.addTodo();
+      this.setState(todo);
+    }
   }
+
 }
+
