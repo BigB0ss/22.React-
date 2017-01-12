@@ -14,7 +14,7 @@ export default class ToDoModelService {
   subscribe(onChange) {
     this.onChanges.push(onChange);
     let index = this.onChanges.length - 1;
-    alert('ololo');
+
     return {
       unsubscribe: () => {
         this.onChanges.splice(index, 1);
@@ -39,6 +39,7 @@ export default class ToDoModelService {
     };
     this.todos = this.todos.concat(toDo);
     this.inform();
+
   }
 
   toggleAll(checked) {

@@ -9,11 +9,7 @@ export default class ToDoComponent extends Component {
   constructor(props) {
     super(props);
     this.todosModelService = window.toDoModelService;
-    /*
-     this.state = {
-     todos: this.toDoModelService.getToDos(),
-     nowShowing: this.props.route.nowShowing
-     }*/
+
 
   }
 
