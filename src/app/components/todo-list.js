@@ -10,25 +10,24 @@ export default  class ToDoList extends Component {
     this.todosModelService = window.toDoModelService;
     this.state = { title: ''};
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeList = this.handleChangeList.bind(this);
+    this.handleSubmitList = this.handleSubmitList.bind(this);
 
   }
 
 
-  handleChange(e) {
+  handleChangeList(e) {
     this.setState({title: e.target.value});
+
   }
 
-  handleSubmit(e) {
+  handleSubmitList(e) {
     e.preventDefault();
     toDoModelService.addTodo(this.state.title);
-    this.setState();
-
+    this.setState({title:''});
   }
-  handleDestroy(){
 
-  }
+
   render() {
     return (
       <div>
@@ -39,8 +38,8 @@ export default  class ToDoList extends Component {
               <div className="editable-text">
                 <div className="editable-text__out"><label>Push changes to Repo</label></div>
                 <div className="editable-text__input">
-                  <form onSubmit={this.handleSubmit}>
-                    <input className="edit" onChange={this.handleChange}
+                  <form onSubmit={this.handleSubmitList}>
+                    <input id="enter" className="edit" autofocus onChange={this.handleChangeList} type="text"
                            value={this.state.title}/>
                   </form>
                 </div>
