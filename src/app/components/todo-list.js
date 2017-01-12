@@ -6,19 +6,15 @@ import ToDoItem from "./todo-item";
 export default  class ToDoList extends Component {
   constructor(props) {
     super(props)
-
     this.todosModelService = window.toDoModelService;
     this.state = { title: ''};
-
     this.handleChangeList = this.handleChangeList.bind(this);
     this.handleSubmitList = this.handleSubmitList.bind(this);
-
   }
 
 
   handleChangeList(e) {
     this.setState({title: e.target.value});
-
   }
 
   handleSubmitList(e) {
@@ -50,8 +46,6 @@ export default  class ToDoList extends Component {
             </div>
           </div>
         </div>
-
-
           {this.todosModelService.todos.map(item => (
             <ToDoItem title={item.title} key={item.key}/>
           ))}

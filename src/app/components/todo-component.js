@@ -3,13 +3,9 @@ import ToDoFooter  from './todo-footer';
 import ToDoList from'./todo-list'
 
 export default class ToDoComponent extends Component {
-
-
-
   constructor(props) {
     super(props);
     this.todosModelService = window.toDoModelService;
-
 
   }
 

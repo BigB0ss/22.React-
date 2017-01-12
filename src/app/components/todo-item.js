@@ -16,10 +16,14 @@ export default  class ToDoItem extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClicked = this.handleClicked.bind(this);
     this.handleDestroy = this.handleDestroy.bind(this);
+    this.clicked = false;
   }
 
   handleClicked(e) {
-    alert('Clicked');
+    e.preventDefault();
+    this.clicked = true;
+    this.setState();
+    console.log(this.clicked)
   }
 
   handleChange(e) {
@@ -38,12 +42,16 @@ export default  class ToDoItem extends Component {
   }
 
   render() {
+    var cn = 'todo-item';
+    if (this.clicked) {
+      cn += 'todo-item--editing'
+    }
     return (
-      <div className="todo-item">
+      <div className={cn}>
         <div className="todo-item__toggle"><input type="checkbox" value="on"/></div>
         <div className="todo-item__text">
           <div className="editable-text">
-            <div className="editable-text__out" onDoubleClick={this.handleClicked} ref="myInput"><label>{this.state.title} </label>
+            <div className="editable-text__out" onDoubleClick={this.handleClicked}><label>{this.state.title} </label>
             </div>
             <div className="editable-text__input">
               <form onSubmit={this.handleSubmit}>
