@@ -58,7 +58,9 @@ export default  class ToDoItem extends Component {
   }
 
   handlerBlur(){
+    this.todosModelService.save(this.props.todo, this.state.title);
     this.setState({editing:false});
+
   }
 
   componentDidUpdate() {

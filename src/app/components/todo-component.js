@@ -10,7 +10,7 @@ export default class ToDoComponent extends Component {
       todos: this.todosModelService.getToDos(),
       nowShowing: this.props.route.nowShowing,
       newToDoTitle: "",
-      checked:false
+
     }
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -57,12 +57,7 @@ export default class ToDoComponent extends Component {
   }
 
   toggleAll() {
-    if(this.state.checked==false)
-      this.setState({checked:true});
-    else{
-      this.setState({checked:false});
-    }
-    this.todosModelService.toggleAll(this.state.checked);
+    this.todosModelService.toggleAll(true);
   }
   componentWillUnmount() {
     this.subscription.unsubscribe();
