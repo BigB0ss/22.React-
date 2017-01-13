@@ -51,6 +51,7 @@ export default  class ToDoItem extends Component {
 
   handleKeyPress(event) {
     const ENTER_KEY = 13;
+    this.state.title=this.state.title.trim();
     if (event.charCode == ENTER_KEY&&this.state.title != "") {
       this.todosModelService.save(this.props.todo, this.state.title);
       this.setState({editing : false})
@@ -58,6 +59,7 @@ export default  class ToDoItem extends Component {
   }
 
   handlerBlur(){
+    this.state.title=this.state.title.trim();
     this.todosModelService.save(this.props.todo, this.state.title);
     this.setState({editing:false});
 

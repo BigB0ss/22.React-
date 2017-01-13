@@ -31,6 +31,7 @@ export default class ToDoComponent extends Component {
 
   handleKeyPress(event) {
     const ENTER_KEY = 13;
+    this.state.newToDoTitle=this.state.newToDoTitle.trim();
     if (event.charCode == ENTER_KEY && this.state.newToDoTitle != "") {
         this.todosModelService.addTodo(this.state.newToDoTitle);
         this.setState({newToDoTitle: ''});
