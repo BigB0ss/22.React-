@@ -48,7 +48,7 @@ export default class ToDoComponent extends Component {
     this.todosModelService.toggle(todo);
     this.setState({
       todos: this.todosModelService.getToDos(),
-      count: this.todosModelService.todos.filter((todo) => todo.completed).length
+
     })
   }
   componentWillReceiveProps(nextProps){
@@ -58,7 +58,10 @@ export default class ToDoComponent extends Component {
   }
 
   toggleAll() {
-    this.todosModelService.toggleAll(true);
+    var flag=false;
+    if(this.state.todos.filter((todo) => todo.completed).length<this.state.todos.length)
+      flag=true;
+    this.todosModelService.toggleAll(flag);
   }
   componentWillUnmount() {
     this.subscription.unsubscribe();
@@ -71,7 +74,7 @@ export default class ToDoComponent extends Component {
         </div>
         <div className="todo-item__text">
           <div className="editable-text">
-            <input type="checkbox" className="todo-app__toggle-all" value="on" onClick={this.toggleAll}/>
+            <input type="checkbox" className={classNames}"todo-app__toggle-all" value="off" onClick={this.toggleAll} />
             <input type="text" className="todo-app__new-todo" placeholder="What needs to be done?"
                    value={this.state.newToDoTitle} onChange={this.handleChange} onKeyPress={this.handleKeyPress}
                    />

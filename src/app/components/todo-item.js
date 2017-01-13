@@ -62,7 +62,6 @@ export default  class ToDoItem extends Component {
     this.state.title=this.state.title.trim();
     this.todosModelService.save(this.props.todo, this.state.title);
     this.setState({editing:false});
-
   }
 
   componentDidUpdate() {
