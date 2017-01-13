@@ -55,9 +55,6 @@ export default class ToDoComponent extends Component {
       nowShowing:nextProps.route.nowShowing
     })
   }
-  componentWillUnmount() {
-    this.subscription.unsubscribe();
-  }
 
   toggleAll() {
     if(this.state.checked==false)
@@ -67,7 +64,9 @@ export default class ToDoComponent extends Component {
     }
     this.todosModelService.toggleAll(this.state.checked);
   }
-
+  componentWillUnmount() {
+    this.subscription.unsubscribe();
+  }
   render() {
     return (
       <div className="todo-app">

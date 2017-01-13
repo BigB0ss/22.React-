@@ -13,8 +13,8 @@ export  default  class ToDoFooter extends Component {
   }
   clearCompleted() {
     this.todosModelService.clearCompleted();
-    alert(this.props.nowShowing);
   }
+
   render() {
     return (
       <div className="todo-list__footer">
@@ -26,7 +26,7 @@ export  default  class ToDoFooter extends Component {
             <div className={classNames("tabs__item", {"tabs__item--active":(this.props.nowShowing=="completed")})}><Link to="/completed">Completed</Link></div>
           </div>
         </div>
-        <button className="todo-list__clear-completed" onClick={this.clearCompleted}>Clear completed</button>
+        {this.todosModelService.getToDos().filter((todo) => todo.completed).length>0?<button className="todo-list__clear-completed" onClick={this.clearCompleted}  >Clear completed</button>:""}
       </div>
     );
   }
