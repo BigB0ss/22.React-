@@ -15,6 +15,7 @@ export default class ToDoComponent extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.deleteToDo = this.deleteToDo.bind(this);
     this.subscription = this.todosModelService.subscribe(this.onToDoModelChange.bind(this));
+    this.toggle=this.toggle.bind(this);
   }
 
   deleteToDo(todo) {
@@ -27,11 +28,10 @@ export default class ToDoComponent extends Component {
   }
 
   handleKeyPress(event) {
-
     const ENTER_KEY = 13;
     if (event.charCode == ENTER_KEY) {
-      this.todosModelService.addTodo(this.state.newToDoTitle);
-      this.setState({newToDoTitle: ''});
+        this.todosModelService.addTodo(this.state.newToDoTitle);
+        this.setState({newToDoTitle: ''});
     }
   }
 
@@ -42,10 +42,10 @@ export default class ToDoComponent extends Component {
   }
 
   toggle(todo) {
-    this.toDoModelService.toggle(todo);
+    this.todosModelService.toggle(todo);
     this.setState({
-      todos: this.toDoModelService.getToDos(),
-      count: this.toDoModelService.todos.filter((todo) => todo.completed).length
+      todos: this.todosModelService.getToDos(),
+      count: this.todosModelService.todos.filter((todo) => todo.completed).length
     })
   }
   componentWillReceiveProps(nextProps){
@@ -67,10 +67,10 @@ export default class ToDoComponent extends Component {
             <input type="checkbox" className="todo-app__toggle-all" value="on"/>
             <input type="text" className="todo-app__new-todo" placeholder="What needs to be done?"
                    value={this.state.newToDoTitle} onChange={this.handleChange} onKeyPress={this.handleKeyPress}
-                   toggle={this.toggle}/>
+                   />
           </div>
         </div>
-        <ToDoList nowShowing={this.state.nowShowing} todos={this.state.todos} deleteToDo={this.deleteToDo}/>
+        <ToDoList nowShowing={this.state.nowShowing} todos={this.state.todos} deleteToDo={this.deleteToDo} toggle={this.toggle}/>
         <ToDoFooter/>
       </div>
     );
