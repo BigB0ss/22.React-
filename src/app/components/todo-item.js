@@ -2,7 +2,7 @@
  * Created by Kirill_Romanov1 on 1/11/2017.
  */
 import React, {Component} from "react";
-import classNames  from 'classnames';
+import classNames from "classnames";
 
 
 export default  class ToDoItem extends Component {
@@ -42,7 +42,6 @@ export default  class ToDoItem extends Component {
 
 
   doubleClicked(event) {
-
     this.setState({editing:true});
   }
 
@@ -57,17 +56,17 @@ export default  class ToDoItem extends Component {
       this.setState({editing : false})
     }
   }
+
   handlerBlur(){
     this.setState({editing:false});
   }
+
   componentDidUpdate() {
     this.input.focus();
   }
+
   render() {
-
-
     return (
-
         <div className={classNames("todo-item",{"todo-item--completed": this.props.todo.completed,
           "todo-item--editing": this.state.editing})}>
         <div className="todo-item__toggle"><input type="checkbox" value="on" checked={this.props.todo.completed}
