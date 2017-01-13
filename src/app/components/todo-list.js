@@ -23,6 +23,7 @@ export default  class ToDoList extends Component {
         break;
       default:
         todos = this.props.todos;
+    }
         return (
           <div className="todo-list">
             {todos.map((elem) => {
@@ -30,7 +31,7 @@ export default  class ToDoList extends Component {
             }).reverse()}
           </div>)
     }
-  }
+
 
 }
 

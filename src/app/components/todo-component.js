@@ -9,13 +9,15 @@ export default class ToDoComponent extends Component {
     this.state = {
       todos: this.todosModelService.getToDos(),
       nowShowing: this.props.route.nowShowing,
-      newToDoTitle: ""
+      newToDoTitle: "",
+      checked:false
     }
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.deleteToDo = this.deleteToDo.bind(this);
     this.subscription = this.todosModelService.subscribe(this.onToDoModelChange.bind(this));
     this.toggle=this.toggle.bind(this);
+    this.toggleAll = this.toggleAll.bind(this);
   }
 
   deleteToDo(todo) {
@@ -29,7 +31,7 @@ export default class ToDoComponent extends Component {
 
   handleKeyPress(event) {
     const ENTER_KEY = 13;
-    if (event.charCode == ENTER_KEY) {
+    if (event.charCode == ENTER_KEY && this.state.newToDoTitle != "") {
         this.todosModelService.addTodo(this.state.newToDoTitle);
         this.setState({newToDoTitle: ''});
     }
@@ -56,6 +58,16 @@ export default class ToDoComponent extends Component {
   componentWillUnmount() {
     this.subscription.unsubscribe();
   }
+
+  toggleAll() {
+    if(this.state.checked==false)
+      this.setState({checked:true});
+    else{
+      this.setState({checked:false});
+    }
+    this.todosModelService.toggleAll(this.state.checked);
+  }
+
   render() {
     return (
       <div className="todo-app">
@@ -64,14 +76,14 @@ export default class ToDoComponent extends Component {
         </div>
         <div className="todo-item__text">
           <div className="editable-text">
-            <input type="checkbox" className="todo-app__toggle-all" value="on"/>
+            <input type="checkbox" className="todo-app__toggle-all" value="on" onClick={this.toggleAll}/>
             <input type="text" className="todo-app__new-todo" placeholder="What needs to be done?"
                    value={this.state.newToDoTitle} onChange={this.handleChange} onKeyPress={this.handleKeyPress}
                    />
           </div>
         </div>
         <ToDoList nowShowing={this.state.nowShowing} todos={this.state.todos} deleteToDo={this.deleteToDo} toggle={this.toggle}/>
-        <ToDoFooter/>
+        <ToDoFooter nowShowing={this.state.nowShowing}/>
       </div>
     );
   }
