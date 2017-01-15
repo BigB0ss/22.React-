@@ -4,6 +4,7 @@ import ToDoList from "./todo-list";
 import classNames from 'classnames';
 
 export default class ToDoComponent extends Component {
+
   constructor(props) {
     super(props);
     this.todosModelService = window.toDoModelService;
@@ -13,8 +14,8 @@ export default class ToDoComponent extends Component {
         .getToDos(),
       nowShowing: this.props.route.nowShowing,
       newToDoTitle: ""
-   
     }
+
     this.handleKeyPress = this
       .handleKeyPress
       .bind(this);
@@ -69,19 +70,14 @@ export default class ToDoComponent extends Component {
   }
 
   toggle(todo) {
-    let check = "";
     this
       .todosModelService
       .toggle(todo);
-
     this.setState({
       todos: this
         .todosModelService
         .getToDos(),
-      check: check
     })
-
-
 
   }
   componentWillReceiveProps(nextProps) {
@@ -89,22 +85,23 @@ export default class ToDoComponent extends Component {
   }
 
   toggleAll() {
-    var flag = false;
+    var checkedAll = false;
     if (this.state.todos.filter((todo) => todo.completed).length < this.state.todos.length) 
-      flag = true;
+      checkedAll = true;
     this
       .todosModelService
-      .toggleAll(flag);
-      setState({check:flag})
+      .toggleAll(checkedAll);
   }
+
   componentWillUnmount() {
     this
       .subscription
       .unsubscribe();
   }
+
   render() {
     let check;
-        if (this.state.todos.filter((todo) => todo.completed).length == this.state.todos.length ) {
+    if (this.state.todos.filter((todo) => todo.completed).length == this.state.todos.length&&this.state.todos.length>0) {
       check = true
     } else {
       check = false;
@@ -136,7 +133,7 @@ export default class ToDoComponent extends Component {
           todos={this.state.todos}
           deleteToDo={this.deleteToDo}
           toggle={this.toggle}/>
-        <ToDoFooter nowShowing={this.state.nowShowing}/>
+        <ToDoFooter nowShowing={this.state.nowShowing} todos={this.state.todos}/>
       </div>
     );
   }
